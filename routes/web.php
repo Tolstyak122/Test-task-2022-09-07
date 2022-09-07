@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return Inertia::render('Dashboard', []);
+})->name('/');
+
+Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
+
+Route::get('goods', [\App\Http\Controllers\GoodController::class, 'index'])->name('goods');
+Route::get('goods/create', [\App\Http\Controllers\GoodController::class, 'create'])->name('goods.create');
+Route::get('goods/edit/{good}', [\App\Http\Controllers\GoodController::class, 'edit'])->name('goods.edit');
